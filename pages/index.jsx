@@ -164,7 +164,12 @@ export default function Home() {
         <div className={styles.content}>
           <div className={styles.box}>
             <div className={styles.image}>
-              <Image src="/vectors/three.svg" width={80} height={80} />
+              <Image
+                src="/vectors/three.svg"
+                width={80}
+                height={80}
+                alt="banner"
+              />
             </div>
             <p>Submit a coding question and your solution.</p>
           </div>
@@ -173,7 +178,12 @@ export default function Home() {
           </div>
           <div className={styles.box}>
             <div className={styles.image}>
-              <Image src="/vectors/two.svg" width={80} height={80} />
+              <Image
+                src="/vectors/two.svg"
+                width={80}
+                height={80}
+                alt="banner"
+              />
             </div>
             <p>
               Hold tight while experienced professionals review your submission.
@@ -184,7 +194,12 @@ export default function Home() {
           </div>
           <div className={styles.box}>
             <div className={styles.image}>
-              <Image src="/vectors/one.svg" width={80} height={80} />
+              <Image
+                src="/vectors/one.svg"
+                width={80}
+                height={80}
+                alt="banner"
+              />
             </div>
             <p>Come back to review your feedback.</p>
           </div>
@@ -195,21 +210,36 @@ export default function Home() {
         <div className={styles.content}>
           <div className={styles.box}>
             <div className={styles.image}>
-              <Image src="/vectors/six.svg" width={80} height={80} />
+              <Image
+                src="/vectors/six.svg"
+                width={80}
+                height={80}
+                alt="banner"
+              />
             </div>
             <p className={styles.num}>200+</p>
             <p>People who can provide feedback for your codes.</p>
           </div>
           <div className={styles.box}>
             <div className={styles.image}>
-              <Image src="/vectors/five.svg" width={80} height={80} />
+              <Image
+                src="/vectors/five.svg"
+                width={80}
+                height={80}
+                alt="banner"
+              />
             </div>
             <p className={styles.num}>4000+</p>
             <p>Reviews of questions and solutions you can learn from.</p>
           </div>
           <div className={styles.box}>
             <div className={styles.image}>
-              <Image src="/vectors/four.svg" width={80} height={80} />
+              <Image
+                src="/vectors/four.svg"
+                width={80}
+                height={80}
+                alt="banner"
+              />
             </div>
             <p className={styles.num}>10+</p>
             <p>Languages you can get reviews on at CodingBlindSpots.</p>

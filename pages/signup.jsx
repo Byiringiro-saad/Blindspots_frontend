@@ -29,8 +29,7 @@ const Signup = () => {
             </div>
             <div className={styles.recap}>
               <div className={styles.select}>
-                <input type="checkbox" />
-                I'm not a robot
+                <input type="checkbox" />I am not a robot
               </div>
               <Image
                 src="/vectors/reCap.svg"

@@ -27,7 +27,7 @@ const Nav = ({ color }) => {
     ) {
       setBlue(true);
     }
-  }, []);
+  }, [router.pathname]);
 
   return (
     <div className={styles.container}>

@@ -26,7 +26,8 @@ const Login = () => {
             <button type="button">Login</button>
           </form>
           <p>
-            Don't have an account!? <Link href="/signup">Signup here</Link>
+            Dont have an account!?
+            <Link href="/signup">Signup here</Link>
           </p>
         </div>
       </Forms>

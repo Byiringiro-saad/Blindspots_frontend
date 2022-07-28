@@ -18,10 +18,10 @@ const Developer = ({ developer }) => {
       </div>
       <p>{developer?.name}</p>
       <div className={styles.socials}>
-        <a href={developer?.github} target="_blank">
+        <a href={developer?.github} target="_blank" rel="noreferrer">
           <BsGithub />
         </a>
-        <a href={developer?.linkedIn} target="_blank">
+        <a href={developer?.linkedIn} target="_blank" rel="noreferrer">
           <BsLinkedin />
         </a>
       </div>

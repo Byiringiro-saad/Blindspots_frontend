@@ -94,7 +94,7 @@ const Submit = () => {
           <p className={styles.header}>Some featured reviews</p>
           <div className={styles.cards}>
             {[...Array(5)].map((x, index) => (
-              <Card card={card} />
+              <Card card={card} key={index} />
             ))}
             <Ad />
           </div>
