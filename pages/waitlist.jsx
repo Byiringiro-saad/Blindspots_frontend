@@ -3,21 +3,14 @@ import React, { useState } from "react";
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Waitlist.module.css";
-import Card from "../components/card/card";
-import Ad from "../components/ad/ad";
+import Two_Part from "../layouts/two-part/two_part";
 
 const Waitlist = () => {
-  const [card, setCard] = useState({
-    title: "How to get sum and product of all numbers from an array.",
-    language: "Python",
-    reviews: 12,
-  });
-
   return (
     <div className={styles.container}>
       <Nav color="393939" />
-      <div className={styles.content}>
-        <div className={styles.left}>
+      <Two_Part>
+        <div className={styles.content}>
           <div className={styles.hero}>
             <p>
               We are developing a code review site for candidates interviewing
@@ -64,16 +57,7 @@ const Waitlist = () => {
             </div>
           </form>
         </div>
-        <div className={styles.right}>
-          <p className={styles.header}>Some featured reviews</p>
-          <div className={styles.cards}>
-            {[...Array(5)].map((x, index) => (
-              <Card card={card} key={index} />
-            ))}
-            <Ad />
-          </div>
-        </div>
-      </div>
+      </Two_Part>
       <Footer />
     </div>
   );

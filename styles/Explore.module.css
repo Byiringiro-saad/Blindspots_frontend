@@ -1,0 +1,64 @@
+.content {
+  width: 100%;
+  height: auto;
+  padding: 100px 0 0 40px;
+}
+
+.top {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.top > p {
+  font-weight: 700;
+  width: 12%;
+}
+
+.top p span {
+  color: var(--blue);
+}
+
+.top .languages {
+  width: 86%;
+  height: 100%;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top .languages .all {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.top .languages .all .box {
+  padding: 5px 15px;
+  display: flex;
+  flex-direction: row;
+  background: #efefef;
+  margin: 0 5px;
+  border-radius: 5px;
+}
+
+.top .languages .all .box p {
+  margin: 0 5px;
+}
+
+.reviews {
+  width: 100%;
+  height: auto;
+  display: flex;
+  margin: 50px 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

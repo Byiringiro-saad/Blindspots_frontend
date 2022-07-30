@@ -23,6 +23,7 @@ const Nav = ({ color }) => {
   useEffect(() => {
     if (
       router.pathname.includes("waitlist") ||
+      router.pathname.includes("explore") ||
       router.pathname.includes("submit")
     ) {
       setBlue(true);

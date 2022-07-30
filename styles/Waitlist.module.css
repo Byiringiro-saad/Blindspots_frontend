@@ -1,24 +1,14 @@
 .content {
   width: 100%;
   height: auto;
-  padding: 90px 65px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  color: var(--black);
-}
-
-.left {
-  width: 70%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  color: var(--black);
 }
 
-.left .hero {
+.hero {
   width: 90%;
   height: 150px;
   color: var(--white);
@@ -30,11 +20,11 @@
   border-radius: 5px;
 }
 
-.left .hero p {
+.hero p {
   text-align: center;
 }
 
-.left .form {
+.form {
   width: 90%;
   height: auto;
   margin: 20px 0 0 0;

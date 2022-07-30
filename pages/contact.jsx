@@ -1,6 +1,6 @@
 import React from "react";
 
-import Forms from "../layouts/forms";
+import Forms from "../layouts/forms/forms";
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Contact.module.css";

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Nav from "../components/nav/nav";
-import Forms from "../layouts/forms";
+import Forms from "../layouts/forms/forms";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Signup.module.css";
 

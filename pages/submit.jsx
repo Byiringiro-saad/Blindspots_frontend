@@ -6,6 +6,7 @@ import Footer from "../components/footer/footer";
 import styles from "../styles/Submit.module.css";
 import Card from "../components/card/card";
 import Ad from "../components/ad/ad";
+import Two_Part from "../layouts/two-part/two_part";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -28,8 +29,8 @@ const Submit = () => {
   return (
     <div className={styles.container}>
       <Nav color="393939" />
-      <div className={styles.content}>
-        <div className={styles.left}>
+      <Two_Part>
+        <div className={styles.content}>
           <div className={styles.header}>
             <p>Make a new Submission</p>
           </div>
@@ -90,16 +91,7 @@ const Submit = () => {
             <button type="button">Submit your code</button>
           </form>
         </div>
-        <div className={styles.right}>
-          <p className={styles.header}>Some featured reviews</p>
-          <div className={styles.cards}>
-            {[...Array(5)].map((x, index) => (
-              <Card card={card} key={index} />
-            ))}
-            <Ad />
-          </div>
-        </div>
-      </div>
+      </Two_Part>
       <Footer />
     </div>
   );
