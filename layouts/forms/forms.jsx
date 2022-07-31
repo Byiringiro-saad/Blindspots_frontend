@@ -36,10 +36,10 @@ const Forms = ({ children, text }) => {
         <div className={styles.image}>
           <Image
             src="/images/banner.png"
-            width={700}
-            height={700}
+            width={900}
+            height={900}
             alt="banner"
-            layout="intrinsic"
+            layout="fixed"
           />
         </div>
       </div>

@@ -66,3 +66,17 @@
   color: var(--blue);
   text-decoration: none;
 }
+
+@media screen and (max-width: 992px) {
+  .content .form {
+    width: 80%;
+  }
+
+  .content .form .row input {
+    height: 50px;
+  }
+
+  .content .form .row {
+    height: 100px;
+  }
+}

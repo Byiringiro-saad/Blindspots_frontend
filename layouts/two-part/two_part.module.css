@@ -33,3 +33,23 @@
   margin: 0 0 20px 0;
   font-weight: 700;
 }
+
+@media screen and (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .right .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -39,6 +39,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  overflow-x: scroll;
 }
 
 .top .languages .all .box {
@@ -61,4 +62,22 @@
   margin: 50px 0;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+@media screen and (max-width: 992px) {
+  .content {
+    padding: 90px 0 0 10px;
+  }
+  .top .languages {
+    width: 80%;
+    margin: 0;
+  }
+
+  .top > p {
+    width: 18%;
+  }
+
+  .reviews {
+    justify-content: center;
+  }
 }

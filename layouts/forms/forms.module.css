@@ -106,3 +106,25 @@
   font-size: 2.5em;
   margin: 0 5px;
 }
+
+@media screen and (max-width: 992px) {
+  .container {
+    height: 900px;
+  }
+
+  .right {
+    width: 52%;
+  }
+
+  .right .layer .quotes {
+    height: 100px;
+  }
+
+  .right .layer .quotes .navigate {
+    width: 15%;
+  }
+
+  .left {
+    width: 48%;
+  }
+}

@@ -79,3 +79,31 @@
   margin: 0 5px 0 0;
   color: var(--black);
 }
+
+@media screen and (max-width: 992px) {
+  .container {
+    padding: 0;
+  }
+
+  .container .left p {
+    margin: 10px;
+  }
+
+  .container .right {
+    padding: 0 10px 0 0;
+  }
+
+  .container .right button {
+    margin: 0 0 0 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container .right {
+    display: none;
+  }
+
+  .container .left .links {
+    display: none;
+  }
+}

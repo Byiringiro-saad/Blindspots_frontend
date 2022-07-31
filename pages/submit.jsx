@@ -4,8 +4,6 @@ import dynamic from "next/dynamic";
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Submit.module.css";
-import Card from "../components/card/card";
-import Ad from "../components/ad/ad";
 import Two_Part from "../layouts/two-part/two_part";
 
 const CodeEditor = dynamic(
