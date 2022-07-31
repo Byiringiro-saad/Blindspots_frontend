@@ -202,11 +202,17 @@
 
 @media screen and (max-width: 600px) {
   .hero {
+    width: 100%;
+    padding: 0;
     height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .hero .header {
+    margin: 0;
   }
 
   .hero p {

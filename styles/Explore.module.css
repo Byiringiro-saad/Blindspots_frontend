@@ -81,3 +81,29 @@
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .content {
+    padding: 70px 0;
+  }
+
+  .top {
+    width: 100%;
+    height: 100px;
+    flex-direction: column;
+  }
+
+  .top > p {
+    width: 100%;
+    text-align: center;
+  }
+
+  .top .languages {
+    width: 100%;
+  }
+
+  .reviews {
+    width: 100%;
+    margin: 0;
+  }
+}

@@ -11,6 +11,7 @@ import styles from "./nav.module.css";
 const Nav = ({ color }) => {
   const router = useRouter();
   const [blue, setBlue] = useState(false);
+  const [relative, setRelative] = useState(false);
 
   const goToLogin = () => {
     router.push("/login");
@@ -28,10 +29,17 @@ const Nav = ({ color }) => {
     ) {
       setBlue(true);
     }
+
+    if (router.pathname === "/") {
+      setRelative(true);
+    }
   }, [router.pathname]);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={relative ? { position: "absolute !important" } : {}}
+    >
       <div className={styles.left}>
         <Logo color={color} />
         <div className={styles.links}>

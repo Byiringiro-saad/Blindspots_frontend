@@ -29,3 +29,20 @@
   line-height: 22px;
   color: var(--bluish);
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    height: auto;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .container .left {
+    height: 50px;
+  }
+
+  .container .right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

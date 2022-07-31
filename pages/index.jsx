@@ -100,9 +100,7 @@ export default function Home() {
     <div className={styles.container}>
       <Nav color="f9f9f9" />
       <div className={styles.hero}>
-        <p className={styles.header}>
-          What would seniors say <br /> about your code!
-        </p>
+        <p className={styles.header}>What would seniors say about your code!</p>
         <p>
           Most companies do not tell why they rejected you. We do. <br /> Submit
           your code and get feedback.
