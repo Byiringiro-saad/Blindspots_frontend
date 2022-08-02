@@ -1,17 +1,29 @@
 .container {
   width: 100%;
-  height: 70px;
+  height: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  padding: 0 20px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
 }
 
-.container .left {
+.content {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.container .sidebar {
+  display: none;
+}
+
+.content .left {
   width: 50%;
   height: 100%;
   display: flex;
@@ -20,17 +32,25 @@
   justify-content: flex-start;
 }
 
-.container .left .links {
+.content .left .links {
   display: flex;
 }
 
-.container .left p {
+.content .left p {
   text-decoration: none;
   margin: 0 20px;
   cursor: pointer;
 }
 
-.container .right {
+.content .left .bars {
+  display: none;
+}
+
+.content > .search {
+  display: none;
+}
+
+.content .right {
   width: 50%;
   height: 100%;
   display: flex;
@@ -39,7 +59,7 @@
   justify-content: flex-end;
 }
 
-.container .right .search {
+.content .right .search {
   width: 230px;
   height: 30px;
   background: var(--white);
@@ -51,7 +71,7 @@
   border-radius: 5px;
 }
 
-.container .right .search input {
+.content .right .search input {
   background: transparent;
   border: none;
   outline: none;
@@ -62,7 +82,7 @@
   color: var(--black);
 }
 
-.container .right button {
+.content .right button {
   width: 80px;
   height: 30px;
   border: none;
@@ -75,25 +95,25 @@
   justify-content: center;
 }
 
-.container .right button .logo {
+.content .right button .logo {
   margin: 0 5px 0 0;
   color: var(--black);
 }
 
 @media screen and (max-width: 992px) {
-  .container {
+  .content {
     padding: 0;
   }
 
-  .container .left p {
+  .content .left p {
     margin: 10px;
   }
 
-  .container .right {
+  .content .right {
     padding: 0 10px 0 0;
   }
 
-  .container .right button {
+  .content .right button {
     margin: 0 0 0 10px;
   }
 }
@@ -103,11 +123,132 @@
     position: relative;
   }
 
-  .container .right {
+  .container .sidebar {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+
+  .container .sidebar .close {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .container .sidebar .nav {
+    width: 90%;
+    height: 100%;
+    position: absolute;
+    padding: 0 10px;
+    top: 0;
+    left: 0;
+    z-index: 120;
+    background: var(--white);
+  }
+
+  .container .sidebar .nav .top {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .container .sidebar .nav .top .icon {
+    font-size: 1.7em;
+  }
+
+  .container .sidebar .nav ul {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .container .sidebar .nav ul li {
+    list-style: none;
+    margin: 10px 0;
+  }
+
+  .container .sidebar .nav ul li a {
+    text-decoration: none;
+    color: var(--black);
+  }
+
+  .container .sidebar .nav .cards > p {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 40px;
+  }
+
+  .container > .search {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 10px 0;
+  }
+
+  .container > .search input {
+    width: 80%;
+    height: 40px;
+    padding: 0 10px;
+    background: #efefef;
+    border: none;
+    border-radius: 5px;
+    /* box-shadow: 3px 3px 10px 5px rgba(0, 0, 0, 0.1); */
+  }
+
+  .container > .search button {
+    width: 40px;
+    height: 40px;
+    background: var(--blue);
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    color: var(--white);
+  }
+
+  .content {
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .content .left .bars {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+  }
+
+  .content > .search {
+    width: 35px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    border-radius: 5px;
+  }
+
+  .content .right {
     display: none;
   }
 
-  .container .left .links {
+  .content .left .links {
     display: none;
   }
 }

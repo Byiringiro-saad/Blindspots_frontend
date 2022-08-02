@@ -68,7 +68,7 @@ const Explore = () => {
                 <p>All</p>
               </div>
               {languages.map((langauge, index) => (
-                <div className={styles.box}>
+                <div className={styles.box} key={index}>
                   <p>{langauge?.name}</p>
                   <p>{langauge?.reviews}</p>
                 </div>

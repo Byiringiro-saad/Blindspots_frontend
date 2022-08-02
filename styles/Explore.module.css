@@ -39,7 +39,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 
 .top .languages .all .box {
@@ -71,6 +71,7 @@
   .top .languages {
     width: 80%;
     margin: 0;
+    overflow: scroll;
   }
 
   .top > p {
@@ -84,7 +85,7 @@
 
 @media screen and (max-width: 600px) {
   .content {
-    padding: 70px 0;
+    padding: 7px 0;
   }
 
   .top {
@@ -100,6 +101,7 @@
 
   .top .languages {
     width: 100%;
+    overflow: scroll;
   }
 
   .reviews {
