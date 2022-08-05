@@ -72,6 +72,16 @@
   font-family: poppins;
 }
 
+.content .form button {
+  margin: 20px 0;
+  width: 150px;
+  height: 35px;
+  border: none;
+  background: var(--blue);
+  border-radius: 5px;
+  color: var(--white);
+}
+
 .content .right {
   width: 30%;
   height: 100%;
