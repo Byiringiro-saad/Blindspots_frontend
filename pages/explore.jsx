@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useQuery } from "react-query";
+import React, { useEffect, useState } from "react";
+import ReactPlaceholder from "react-placeholder/lib";
 // import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 
+import Pagination from "../components/pagination/pagination";
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Explore.module.css";
 import Box from "../components/box/box";
 
-const fetchSnippets = async () => {
-  const res = await axios.get("/api/snippets");
-  return res.json();
-};
-
 const Explore = () => {
+  const [loading, setLoading] = useState(true);
   const [snippets, setSnippets] = useState([]);
-
-  const { data, status } = useQuery("snippets", fetchSnippets);
-
-  console.log("data", data);
-  console.log("status", status);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perpage] = useState(12);
 
   const [languages, setLanguages] = useState([
     {
@@ -56,12 +50,25 @@ const Explore = () => {
     },
   ]);
 
-  const [review, setReview] = useState({
-    language: "Python",
-    description:
-      "How to add two numbers and find their product, quotient, sum and difference",
-    reviews: 12,
-  });
+  const indexOfLastPost = currentPage * perpage;
+  const indexOfFirstPost = indexOfLastPost - perpage;
+  const currentPosts = snippets.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get("/api/snippets").then((data) => {
+      setSnippets(data.data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -91,11 +98,31 @@ const Explore = () => {
             {/* <AiOutlineRight className={styles.icon} /> */}
           </div>
         </div>
-        <div className={styles.reviews}>
-          {[...Array(10)].map((r, index) => (
-            <Box review={review} key={index} />
-          ))}
-        </div>
+        {loading ? (
+          <div className={styles.reviews}>
+            {[...Array(8)].map((_, index) => (
+              <ReactPlaceholder
+                key={index}
+                ready={!loading}
+                showLoadingAnimation={true}
+                type="rect"
+                style={{
+                  width: "300px",
+                  height: "300px",
+                  margin: "0 20px 20px 0",
+                  borderRadius: "5px",
+                }}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.reviews}>
+            {currentPosts.map((snippet, index) => (
+              <Box review={snippet} key={index} />
+            ))}
+          </div>
+        )}
+        <Pagination perpage={perpage} data={snippets} paginate={paginate} />
       </div>
       <Footer />
     </div>
