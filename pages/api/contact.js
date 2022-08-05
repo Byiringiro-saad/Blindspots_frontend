@@ -3,16 +3,14 @@
 import axios from "../../features/axios";
 
 export default function handler(req, res) {
-  const { username, email, about, website, painpoints } = req.body;
+  const { names, email, message } = req.body;
 
   return new Promise(async (resolve, reject) => {
     await axios
-      .post("", {
-        username: username,
+      .post("/api/v1/token/contact", {
+        names: names,
         email: email,
-        about: about,
-        website: website,
-        painpoints: painpoints,
+        message: message,
       })
       .then((response) => {
         res.send(response.data);

@@ -1,9 +1,9 @@
 import React from "react";
+import axios from "axios";
+import Image from "next/image";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-import axios from "axios";
-import Image from "next/image";
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Waitlist.module.css";
@@ -15,7 +15,10 @@ const Waitlist = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const handleWaitlist = async (data) => {
-    setLoading(true);
+    axios.post("/api/waitlist", data).then((res) => {
+      console.log(res.data);
+      setLoading(true);
+    });
   };
 
   return (
