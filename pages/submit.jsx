@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import axios from "axios";
+import Image from "next/image";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
@@ -13,15 +17,44 @@ const CodeEditor = dynamic(
 
 const Submit = () => {
   const [code, setCode] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [card, setCard] = useState({
     title: "How to get sum and product of all numbers from an array.",
     language: "Python",
     reviews: 12,
   });
 
+  const { register, handleSubmit, reset } = useForm();
+
   const handleCodeChange = (e) => {
     setCode(e.target.value);
+  };
+
+  const handleSubmission = async (data) => {
+    axios
+      .post("/api/submit", {
+        title: data.title,
+        language: data.language,
+        text: code,
+      })
+      .then((res) => {
+        setLoading(false);
+        if (res.data.id) {
+          toast.success("Submission Successful", {
+            position: "top-right",
+            autoClose: 2000,
+            pauseOnHover: false,
+          });
+          reset({ title: "", position: "", description: "" });
+          setCode("");
+        } else {
+          toast.error("Submission Failed", {
+            position: "top-right",
+            autoClose: 2000,
+            pauseOnHover: false,
+          });
+        }
+      });
   };
 
   return (
@@ -32,17 +65,23 @@ const Submit = () => {
           <div className={styles.header}>
             <p>Make a new Submission</p>
           </div>
-          <form action="#" className={styles.form}>
+          <form
+            action="#"
+            className={styles.form}
+            onSubmit={handleSubmit(handleSubmission)}
+          >
             <div className={styles.row}>
               <label htmlFor="title">Title</label>
               <input
                 type="text"
                 placeholder="Choose a short descriptive title"
+                {...register("title")}
+                required
               />
             </div>
             <div className={styles.row}>
               <label htmlFor="langauge">Language</label>
-              <select name="language">
+              <select name="language" {...register("language")} required>
                 <option value="javascript">Javascript</option>
               </select>
             </div>
@@ -53,6 +92,7 @@ const Submit = () => {
               <input
                 type="text"
                 placeholder="e.g. Junior, senior, Principal Engineer..."
+                {...register("position")}
               />
             </div>
             <div className={styles.bigRow}>
@@ -61,6 +101,7 @@ const Submit = () => {
                 cols="30"
                 rows="7"
                 placeholder="Describe your question here"
+                {...register("description")}
               ></textarea>
             </div>
             <div className={styles.editorRow}>
@@ -86,7 +127,14 @@ const Submit = () => {
               that you submit the complete question along with your solution.
               Submissions with inadequate context will be ignored.
             </p>
-            <button type="button">Submit your code</button>
+            <button type="submit">
+              {" "}
+              {loading ? (
+                <Image src="/loader.svg" alt="loader" width={20} height={20} />
+              ) : (
+                "Submit your code"
+              )}
+            </button>
           </form>
         </div>
       </Two_Part>
