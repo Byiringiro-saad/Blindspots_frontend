@@ -156,19 +156,19 @@ const Nav = ({ color }) => {
               <IoClose className={styles.icon} onClick={handleSideBar} />
             </div>
             <ul>
-              <li>
+              <li onClick={handleSideBar}>
                 <Link href="/explore">Explore</Link>
               </li>
-              <li>
+              <li onClick={handleSideBar}>
                 <Link href="/waitlist">Join Waitlist</Link>
               </li>
-              <li>
+              <li onClick={handleSideBar}>
                 <Link href="/contact">Contact Us</Link>
               </li>
-              <li>
+              <li onClick={handleSideBar}>
                 <Link href="/submit">Submit</Link>
               </li>
-              <li>
+              <li onClick={handleSideBar}>
                 <Link href="/login">Login</Link>
               </li>
             </ul>

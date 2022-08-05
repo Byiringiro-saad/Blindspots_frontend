@@ -5,9 +5,9 @@ import axios from "../../features/axios";
 export default function handler(req, res) {
   const { username, password } = req.body;
 
-  return new Promise((resolve, reject) => {
-    axios
-      .post("/token/login", { username: username, password: password })
+  return new Promise(async (resolve, reject) => {
+    await axios
+      .post("/api/v1/token/login", { username: username, password: password })
       .then((response) => {
         res.json(response.data);
         resolve();

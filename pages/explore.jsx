@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useQuery } from "react-query";
 // import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 
 import Nav from "../components/nav/nav";
@@ -6,7 +8,19 @@ import Footer from "../components/footer/footer";
 import styles from "../styles/Explore.module.css";
 import Box from "../components/box/box";
 
+const fetchSnippets = async () => {
+  const res = await axios.get("/api/snippets");
+  return res.json();
+};
+
 const Explore = () => {
+  const [snippets, setSnippets] = useState([]);
+
+  const { data, status } = useQuery("snippets", fetchSnippets);
+
+  console.log("data", data);
+  console.log("status", status);
+
   const [languages, setLanguages] = useState([
     {
       name: "Clicke",

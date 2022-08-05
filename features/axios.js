@@ -4,5 +4,5 @@ import axios from "axios";
 dotenv.config();
 
 export default axios.create({
-  baseURL: `${process.env.API_URL}/api/v1`,
+  baseURL: `${process.env.API_URL}`,
 });

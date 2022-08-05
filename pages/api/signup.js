@@ -5,9 +5,13 @@ import axios from "../../features/axios";
 export default function handler(req, res) {
   const { username, email, password } = req.body;
 
-  return new Promise((resolve, reject) => {
-    axios
-      .post("/users/", { username: username, email: email, password: password })
+  return new Promise(async (resolve, reject) => {
+    await axios
+      .post("/api/v1/users/", {
+        username: username,
+        email: email,
+        password: password,
+      })
       .then((response) => {
         res.send(response.data);
         resolve();
