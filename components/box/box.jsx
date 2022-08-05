@@ -45,7 +45,7 @@ const Box = ({ review }) => {
       </div>
       <div className={styles.bottom}>
         <MdReviews className={styles.icon} />
-        <p>{review?.comments[0]} Reviews</p>
+        <p>{review?.comments[0] || 0} Reviews</p>
       </div>
     </div>
   );

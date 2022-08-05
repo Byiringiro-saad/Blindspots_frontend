@@ -49,6 +49,7 @@
   background: #efefef;
   margin: 0 5px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .top .languages .all .box p {

@@ -11,6 +11,10 @@
   justify-content: flex-start;
 }
 
+.container:hover {
+  transform: scale(1.01);
+}
+
 .top {
   width: 100%;
   height: 15%;

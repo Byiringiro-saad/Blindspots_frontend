@@ -17,6 +17,7 @@
     "@uiw/react-textarea-code-editor": "^2.0.3",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
+    "lodash": "^4.17.21",
     "next": "12.2.3",
     "next-redux-wrapper": "^7.0.5",
     "next-remove-imports": "^1.0.6",

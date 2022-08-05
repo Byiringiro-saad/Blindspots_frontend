@@ -8,51 +8,21 @@ import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Explore.module.css";
 import Box from "../components/box/box";
+import filterArray from "../features/groupBy";
 
 const Explore = () => {
   const [loading, setLoading] = useState(true);
   const [snippets, setSnippets] = useState([]);
+  const [currentSnippets, setCurrentSnippets] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [perpage] = useState(12);
+  const [active, setActive] = useState("all");
 
-  const [languages, setLanguages] = useState([
-    {
-      name: "Clicke",
-      reviews: 3,
-    },
-    {
-      name: "Javascript",
-      reviews: 8,
-    },
-    {
-      name: "Java",
-      reviews: 4,
-    },
-    {
-      name: "Python",
-      reviews: 9,
-    },
-    {
-      name: "MySql",
-      reviews: 3,
-    },
-    {
-      name: "C",
-      reviews: 2,
-    },
-    {
-      name: "C++",
-      reviews: 1,
-    },
-    {
-      name: "MySql",
-      reviews: 10,
-    },
-  ]);
+  const [languages, setLanguages] = useState([{ name: "all" }]);
 
   const indexOfLastPost = currentPage * perpage;
   const indexOfFirstPost = indexOfLastPost - perpage;
-  const currentPosts = snippets.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = currentSnippets.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (page) => {
     setCurrentPage(page);
@@ -62,10 +32,40 @@ const Explore = () => {
     });
   };
 
+  const handlelanguage = (language) => {
+    setActive(language.name);
+
+    if (language.name === "all") {
+      setCurrentPage(1);
+      setCurrentSnippets(snippets);
+    } else {
+      const filtered = snippets.filter((snippet) => {
+        if (snippet.language === language.name) {
+          return true;
+        }
+      });
+      setCurrentPage(1);
+      setCurrentSnippets(filtered);
+    }
+  };
+
+  useEffect(() => {
+    const groupedSnippets = filterArray(snippets, "language");
+    let groupedLanguages = Object.keys(groupedSnippets).map((k) => ({
+      name: k,
+      reviews: groupedSnippets[k].length,
+    }));
+
+    if (languages.length < 2) {
+      setLanguages([...languages, ...groupedLanguages]);
+    }
+  }, [snippets]);
+
   useEffect(() => {
     setLoading(true);
     axios.get("/api/snippets").then((data) => {
       setSnippets(data.data);
+      setCurrentSnippets(data.data);
       setLoading(false);
     });
   }, []);
@@ -82,14 +82,17 @@ const Explore = () => {
           <div className={styles.languages}>
             {/* <AiOutlineLeft className={styles.icon} /> */}
             <div className={styles.all}>
-              <div
-                className={styles.box}
-                style={{ background: "var(--blue)", color: "var(--white)" }}
-              >
-                <p>All</p>
-              </div>
               {languages.map((langauge, index) => (
-                <div className={styles.box} key={index}>
+                <div
+                  className={styles.box}
+                  style={
+                    langauge.name === active
+                      ? { background: "var(--blue)", color: "var(--white)" }
+                      : {}
+                  }
+                  key={index}
+                  onClick={() => handlelanguage(langauge, index)}
+                >
                   <p>{langauge?.name}</p>
                   <p>{langauge?.reviews}</p>
                 </div>
@@ -122,7 +125,11 @@ const Explore = () => {
             ))}
           </div>
         )}
-        <Pagination perpage={perpage} data={snippets} paginate={paginate} />
+        <Pagination
+          perpage={perpage}
+          data={currentSnippets}
+          paginate={paginate}
+        />
       </div>
       <Footer />
     </div>
