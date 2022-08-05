@@ -1,10 +1,12 @@
 import Head from "next/head";
 import Router from "next/router";
 import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-import "@uiw/react-textarea-code-editor/dist.css";
+import { ToastContainer } from "react-toastify";
 
 import "../styles/globals.css";
+import "nprogress/nprogress.css";
+import "react-toastify/dist/ReactToastify.css";
+import "@uiw/react-textarea-code-editor/dist.css";
 
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -17,6 +19,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Coding Blindspots</title>
       </Head>
+      <ToastContainer />
       <Component {...pageProps} />
     </>
   );

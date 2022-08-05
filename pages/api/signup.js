@@ -8,9 +8,18 @@ dotenv.config();
 export default function handler(req, res) {
   const { username, email, password } = req.body;
 
-  axios
-    .post("/users/", { username: username, email: email, password: password })
-    .then((response) => {
-      return res.send(response.data);
-    });
+  console.log(username, email, password);
+
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/users/", { username: username, email: email, password: password })
+      .then((response) => {
+        res.send(response.data);
+        resolve();
+      })
+      .catch((error) => {
+        res.send(error);
+        reject();
+      });
+  });
 }

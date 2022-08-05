@@ -3,6 +3,10 @@ import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+
+import { MdDone, MdErrorOutline } from "react-icons/md";
 
 import Nav from "../components/nav/nav";
 import Forms from "../layouts/forms/forms";
@@ -12,12 +16,20 @@ import styles from "../styles/Signup.module.css";
 const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [normal, setNormal] = useState(true);
+  const router = useRouter();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const handleSignup = async (data) => {
     setLoading(true);
     setDisabled(true);
+    setError(false);
+    setSuccess(false);
+    setNormal(false);
+
     axios
       .post("/api/signup", {
         username: data.username,
@@ -25,10 +37,27 @@ const Signup = () => {
         password: data.password,
       })
       .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
+        if (res.data.id) {
+          setSuccess(true);
+          setError(false);
+          setTimeout(() => {
+            router.push("/login");
+          }, 2000);
+          reset({ username: "", password: "", email: "" });
+          toast.success("Welcome abroad!", {
+            position: "top-right",
+            autoClose: 2000,
+            pauseOnHover: false,
+          });
+        } else {
+          setSuccess(false);
+          setError(true);
+          toast.error("User already exists!", {
+            position: "top-right",
+            autoClose: 2000,
+            pauseOnHover: false,
+          });
+        }
       })
       .finally(() => {
         setLoading(false);
@@ -88,12 +117,23 @@ const Signup = () => {
                 <span> Privacy </span>
               </p>
             </div>
-            <button type="submit" disabled={disabled}>
-              {loading ? (
+            <button
+              type="submit"
+              disabled={disabled}
+              style={
+                error
+                  ? { background: "var(--red)" }
+                  : success
+                  ? { background: "var(--success)" }
+                  : {}
+              }
+            >
+              {loading && (
                 <Image src="/loader.svg" alt="loader" width={25} height={25} />
-              ) : (
-                "Sign up"
               )}
+              {success && <MdDone className={styles.icon} />}
+              {error && <MdErrorOutline className={styles.icon} />}
+              {normal && "Signup"}
             </button>
           </form>
           <p>

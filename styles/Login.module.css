@@ -58,6 +58,10 @@
   border-radius: 5px;
 }
 
+.content .form .icon {
+  font-size: 1.4em;
+}
+
 .content p {
   line-height: 50px;
 }
