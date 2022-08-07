@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
 
 import { IoClose } from "react-icons/io5";
@@ -13,6 +14,7 @@ import Card from "../card/card";
 import Ad from "../ad/ad";
 
 const Nav = ({ color }) => {
+  const cookies = new Cookies();
   const router = useRouter();
   const [blue, setBlue] = useState(false);
   const [relative, setRelative] = useState(false);
@@ -25,7 +27,12 @@ const Nav = ({ color }) => {
   });
 
   const goToLogin = () => {
-    router.push("/login");
+    if (cookies.get("auth_token")) {
+      cookies.remove("auth_token");
+      router.push("/");
+    } else {
+      router.push("/login");
+    }
   };
 
   const goToSubmit = () => {
@@ -134,7 +141,7 @@ const Nav = ({ color }) => {
               className={styles.logo}
               style={blue ? { color: "var(--white)" } : {}}
             />
-            Login
+            {cookies.get("auth_token") ? "Logout" : "Login"}
           </button>
         </div>
       </div>

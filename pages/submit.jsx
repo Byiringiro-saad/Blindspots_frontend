@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import Cookies from "universal-cookie";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 import Nav from "../components/nav/nav";
@@ -16,6 +18,8 @@ const CodeEditor = dynamic(
 );
 
 const Submit = () => {
+  const cookies = new Cookies();
+  const router = useRouter();
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [card, setCard] = useState({
@@ -31,6 +35,16 @@ const Submit = () => {
   };
 
   const handleSubmission = async (data) => {
+    if (!cookies.get("auth_token")) {
+      toast.error("Sign in first!", {
+        position: "top-right",
+        autoClose: 2000,
+        pauseOnHover: false,
+      });
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
+    }
     axios
       .post("/api/submit", {
         title: data.title,

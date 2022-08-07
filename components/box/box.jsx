@@ -1,10 +1,11 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 import { MdReviews } from "react-icons/md";
 
-import { parseIfJson } from "../../features/parsetJson";
 import styles from "./box.module.css";
+import { parseIfJson } from "../../features/parsetJson";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
@@ -12,8 +13,14 @@ const CodeEditor = dynamic(
 );
 
 const Box = ({ review }) => {
+  const router = useRouter();
+
+  const goToReview = () => {
+    router.push(`/explore/${review?.id}`);
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={goToReview}>
       <div className={styles.top}>
         <div className={styles.language}>
           <p>{review?.language}</p>
