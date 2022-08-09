@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { EditorView } from "codemirror";
 
 import { MdReviews } from "react-icons/md";
 
@@ -8,6 +9,8 @@ import { parseIfJson } from "../../features/parsetJson";
 
 const Box = ({ review }) => {
   const router = useRouter();
+
+  console.log(review);
 
   const goToReview = () => {
     router.push(`/explore/${review?.id}`);

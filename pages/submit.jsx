@@ -4,7 +4,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import cookieCutter from "cookie-cutter";
+import { getCookie } from "cookies-next";
 
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
@@ -12,7 +12,7 @@ import styles from "../styles/Submit.module.css";
 import Two_Part from "../layouts/two-part/two_part";
 import Editor from "../components/editor/editor";
 
-const Submit = ({ auth }) => {
+const Submit = () => {
   const router = useRouter();
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const Submit = ({ auth }) => {
   }, []);
 
   const handleSubmission = async (data) => {
-    if (cookieCutter.get("auth_token")) {
+    if (getCookie("auth_token")) {
       toast.error("Sign in first!", {
         position: "top-right",
         autoClose: 2000,
@@ -61,7 +61,7 @@ const Submit = ({ auth }) => {
   };
 
   useEffect(() => {
-    if (!cookieCutter.get("auth_token")) {
+    if (!getCookie("auth_token")) {
       toast.error("Sign in first!", {
         position: "top-right",
         autoClose: 2000,

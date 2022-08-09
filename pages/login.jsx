@@ -5,7 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import cookieCutter from "cookie-cutter";
+import { setCookie } from "cookies-next";
 
 import { MdDone, MdErrorOutline } from "react-icons/md";
 
@@ -41,7 +41,7 @@ const Login = () => {
           setSuccess(true);
           setError(false);
           setTimeout(() => {
-            cookieCutter.set("auth_token", res.data.auth_token);
+            setCookie("auth_token", res.data.auth_token);
             router.push("/explore");
           }, 2000);
           reset({ username: "", password: "" });

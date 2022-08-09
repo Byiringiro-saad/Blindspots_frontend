@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import cookieCutter from "cookie-cutter";
+import { deleteCookie, getCookie } from "cookies-next";
 
 import { IoClose } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
@@ -13,7 +13,7 @@ import styles from "./nav.module.css";
 import Card from "../card/card";
 import Ad from "../ad/ad";
 
-const Nav = ({ data, color }) => {
+const Nav = ({ color }) => {
   const router = useRouter();
   const [blue, setBlue] = useState(false);
   const [relative, setRelative] = useState(false);
@@ -25,11 +25,11 @@ const Nav = ({ data, color }) => {
     reviews: 12,
   });
 
-  console.log(data);
+  console.log(getCookie("auth_token"));
 
   const goToLogin = () => {
-    if (cookieCutter.get("auth_token")) {
-      cookieCutter.set("auth_token", "", { expires: new Date(0) });
+    if (getCookie("auth_token")) {
+      deleteCookie("auth_token", "", { expires: new Date(0) });
       router.push("/");
     } else {
       router.push("/login");
@@ -142,7 +142,7 @@ const Nav = ({ data, color }) => {
               className={styles.logo}
               style={blue ? { color: "var(--white)" } : {}}
             />
-            {cookieCutter.get("auth_token") ? "Logout" : "Login"}
+            {getCookie("auth_token") ? "Logout" : "Login"}
           </button>
         </div>
       </div>

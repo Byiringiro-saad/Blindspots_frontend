@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import ReactPlaceholder from "react-placeholder/lib";
-import cookieCutter from "cookie-cutter";
+import { getCookie } from "cookies-next";
 
 import Pagination from "../../components/pagination/pagination";
 import Nav from "../../components/nav/nav";
@@ -65,8 +65,8 @@ const Explore = () => {
   }, [snippets]);
 
   useEffect(() => {
-    console.log(cookieCutter.get("auth_token"));
-    if (cookieCutter.get("auth_token")) {
+    console.log(getCookie("auth_token"));
+    if (getCookie("auth_token")) {
       setLoading(true);
       axios.get("/api/snippets").then((data) => {
         setSnippets(data.data);
