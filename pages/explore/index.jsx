@@ -65,8 +65,7 @@ const Explore = () => {
   }, [snippets]);
 
   useEffect(() => {
-    console.log(getCookie("auth_token"));
-    if (getCookie("auth_token")) {
+    if (localStorage.getItem("auth_token")) {
       setLoading(true);
       axios.get("/api/snippets").then((data) => {
         setSnippets(data.data);

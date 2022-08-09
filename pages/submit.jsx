@@ -24,7 +24,7 @@ const Submit = () => {
   }, []);
 
   const handleSubmission = async (data) => {
-    if (getCookie("auth_token")) {
+    if (localStorage.getItem("auth_token")) {
       toast.error("Sign in first!", {
         position: "top-right",
         autoClose: 2000,
@@ -61,7 +61,7 @@ const Submit = () => {
   };
 
   useEffect(() => {
-    if (!getCookie("auth_token")) {
+    if (!localStorage.getItem("auth_token")) {
       toast.error("Sign in first!", {
         position: "top-right",
         autoClose: 2000,

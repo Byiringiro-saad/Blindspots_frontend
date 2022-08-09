@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { deleteCookie, getCookie } from "cookies-next";
 
 import { IoClose } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
@@ -18,6 +17,7 @@ const Nav = ({ color }) => {
   const [blue, setBlue] = useState(false);
   const [relative, setRelative] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [sideBar, setSideBar] = useState(false);
   const [card, setCard] = useState({
     title: "How to get sum and product of all numbers from an array.",
@@ -25,11 +25,9 @@ const Nav = ({ color }) => {
     reviews: 12,
   });
 
-  console.log(getCookie("auth_token"));
-
   const goToLogin = () => {
-    if (getCookie("auth_token")) {
-      deleteCookie("auth_token", "", { expires: new Date(0) });
+    if (localStorage.getItem("auth_token")) {
+      localStorage.removeItem("auth_token");
       router.push("/");
     } else {
       router.push("/login");
@@ -49,6 +47,10 @@ const Nav = ({ color }) => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("auth_token")) {
+      setLoggedIn(true);
+    }
+
     if (
       router.pathname.includes("waitlist") ||
       router.pathname.includes("explore") ||
@@ -142,7 +144,7 @@ const Nav = ({ color }) => {
               className={styles.logo}
               style={blue ? { color: "var(--white)" } : {}}
             />
-            {getCookie("auth_token") ? "Logout" : "Login"}
+            {loggedIn ? "Logout" : "Login"}
           </button>
         </div>
       </div>

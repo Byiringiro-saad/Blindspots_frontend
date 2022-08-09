@@ -41,7 +41,7 @@ const Login = () => {
           setSuccess(true);
           setError(false);
           setTimeout(() => {
-            setCookie("auth_token", res.data.auth_token);
+            localStorage.setItem("auth_token", res.data.auth_token);
             router.push("/explore");
           }, 2000);
           reset({ username: "", password: "" });
