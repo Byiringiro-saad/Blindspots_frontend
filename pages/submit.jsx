@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
+import React, { useCallback, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -11,28 +10,19 @@ import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Submit.module.css";
 import Two_Part from "../layouts/two-part/two_part";
-
-const CodeEditor = dynamic(
-  () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
-  { ssr: false }
-);
+import Editor from "../components/editor/editor";
 
 const Submit = () => {
   const cookies = new Cookies();
   const router = useRouter();
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
-  const [card, setCard] = useState({
-    title: "How to get sum and product of all numbers from an array.",
-    language: "Python",
-    reviews: 12,
-  });
 
   const { register, handleSubmit, reset } = useForm();
 
-  const handleCodeChange = (e) => {
-    setCode(e.target.value);
-  };
+  const handleCodeChange = useCallback((value, _) => {
+    setCode(value);
+  }, []);
 
   const handleSubmission = async (data) => {
     if (!cookies.get("auth_token")) {
@@ -120,21 +110,7 @@ const Submit = () => {
             </div>
             <div className={styles.editorRow}>
               <label htmlFor="codes">Solution</label>
-              <CodeEditor
-                value={code}
-                language="js"
-                placeholder="Write your code here!"
-                onChange={handleCodeChange}
-                padding={15}
-                style={{
-                  background: "#F9F9F9",
-                  width: "100%",
-                  height: "100%",
-                  border: "1px solid var(--gray)",
-                  borderRadius: "5px",
-                  overflowY: "scroll",
-                }}
-              />
+              <Editor codes={code} onChange={handleCodeChange} />
             </div>
             <p>
               In order for us to give you feedback on your code, please ensure
@@ -142,7 +118,6 @@ const Submit = () => {
               Submissions with inadequate context will be ignored.
             </p>
             <button type="submit">
-              {" "}
               {loading ? (
                 <Image src="/loader.svg" alt="loader" width={20} height={20} />
               ) : (
