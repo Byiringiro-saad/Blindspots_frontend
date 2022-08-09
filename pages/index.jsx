@@ -25,22 +25,6 @@ import Footer from "../components/footer/footer";
 
 export default function Home() {
   const [people, setPeople] = useState([
-    // {
-    //   name: "Mary Freund",
-    //   occupation: "Software engineer",
-    //   image:
-    //     "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-    //   review:
-    //     "Donec a eros justo. Fusce egestas tristique ultrices. Nam tempor, augue nec tincidunt molestie, massa nunc varius arcu, at scelerisque elit erat a magna. Donec quis erat at libero ultrices mollis. In hac habitasse platea ",
-    // },
-    // {
-    //   name: "Mary Freund",
-    //   occupation: "Software engineer",
-    //   image:
-    //     "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-    //   review:
-    //     "Donec a eros justo. Fusce egestas tristique ultrices. Nam tempor, augue nec tincidunt molestie, massa nunc varius arcu, at scelerisque elit erat a magna. Donec quis erat at libero ultrices mollis. In hac habitasse platea ",
-    // },
     {
       name: "Mary Freund",
       occupation: "Software engineer",

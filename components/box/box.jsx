@@ -1,16 +1,10 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
 import { MdReviews } from "react-icons/md";
 
 import styles from "./box.module.css";
 import { parseIfJson } from "../../features/parsetJson";
-
-const CodeEditor = dynamic(
-  () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
-  { ssr: false }
-);
 
 const Box = ({ review }) => {
   const router = useRouter();
@@ -33,23 +27,7 @@ const Box = ({ review }) => {
           )}
         </div>
       </div>
-      <div className={styles.codes}>
-        <CodeEditor
-          value={parseIfJson(review?.text)}
-          language={
-            review?.language == "javascript" ? "js" : `${review?.language}`
-          }
-          padding={15}
-          style={{
-            background: "#F9F9F9",
-            width: "100%",
-            height: "100%",
-            borderRadius: "5px",
-            overflowY: "hidden",
-          }}
-          disabled={true}
-        />
-      </div>
+      <div className={styles.codes}></div>
       <div className={styles.bottom}>
         <MdReviews className={styles.icon} />
         <p>{review?.comments[0] || 0} Reviews</p>

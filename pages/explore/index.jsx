@@ -1,10 +1,9 @@
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import ReactPlaceholder from "react-placeholder/lib";
-// import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
+import cookieCutter from "cookie-cutter";
 
 import Pagination from "../../components/pagination/pagination";
 import Nav from "../../components/nav/nav";
@@ -15,7 +14,6 @@ import filterArray from "../../features/groupBy";
 
 const Explore = () => {
   const router = useRouter();
-  const cookies = new Cookies();
   const [loading, setLoading] = useState(true);
   const [snippets, setSnippets] = useState([]);
   const [currentSnippets, setCurrentSnippets] = useState([]);
@@ -54,8 +52,6 @@ const Explore = () => {
     }
   };
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     const groupedSnippets = filterArray(snippets, "language");
     let groupedLanguages = Object.keys(groupedSnippets).map((k) => ({
@@ -69,7 +65,8 @@ const Explore = () => {
   }, [snippets]);
 
   useEffect(() => {
-    if (cookies.get("auth_token")) {
+    console.log(cookieCutter.get("auth_token"));
+    if (cookieCutter.get("auth_token")) {
       setLoading(true);
       axios.get("/api/snippets").then((data) => {
         setSnippets(data.data);

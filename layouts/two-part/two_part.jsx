@@ -1,37 +1,21 @@
 import React, { useEffect, useState } from "react";
 import ReactPlaceholder from "react-placeholder";
-import { useRouter } from "next/router";
-import Cookies from "universal-cookie";
-import { toast } from "react-toastify";
 import axios from "axios";
 
 import styles from "./two_part.module.css";
 import Ad from "../../components/ad/ad";
 import Card from "../../components/card/card";
 
-const Two_Part = ({ children }) => {
-  const cookies = new Cookies();
-  const router = useRouter();
+const Two_Part = ({ children, data }) => {
   const [loading, setLoading] = useState(false);
   const [snippets, setSnippets] = useState([]);
 
   useEffect(() => {
-    if (cookies.get("auth_token")) {
-      setLoading(true);
-      axios.get("/api/snippets").then((data) => {
-        setSnippets(data.data);
-        setLoading(false);
-      });
-    } else {
-      toast.error("Sign in first!", {
-        position: "top-right",
-        autoClose: 2000,
-        pauseOnHover: false,
-      });
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
-    }
+    setLoading(true);
+    axios.get("/api/snippets").then((data) => {
+      setSnippets(data.data);
+      setLoading(false);
+    });
   }, []);
 
   return (

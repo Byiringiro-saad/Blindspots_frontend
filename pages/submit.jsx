@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { toast } from "react-toastify";
-import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import cookieCutter from "cookie-cutter";
 
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
@@ -12,8 +12,7 @@ import styles from "../styles/Submit.module.css";
 import Two_Part from "../layouts/two-part/two_part";
 import Editor from "../components/editor/editor";
 
-const Submit = () => {
-  const cookies = new Cookies();
+const Submit = ({ auth }) => {
   const router = useRouter();
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,7 @@ const Submit = () => {
   }, []);
 
   const handleSubmission = async (data) => {
-    if (!cookies.get("auth_token")) {
+    if (cookieCutter.get("auth_token")) {
       toast.error("Sign in first!", {
         position: "top-right",
         autoClose: 2000,
@@ -60,6 +59,19 @@ const Submit = () => {
         }
       });
   };
+
+  useEffect(() => {
+    if (!cookieCutter.get("auth_token")) {
+      toast.error("Sign in first!", {
+        position: "top-right",
+        autoClose: 2000,
+        pauseOnHover: false,
+      });
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
+    }
+  }, []);
 
   return (
     <div className={styles.container}>

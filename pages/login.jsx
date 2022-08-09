@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
-import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import cookieCutter from "cookie-cutter";
 
 import { MdDone, MdErrorOutline } from "react-icons/md";
 
@@ -22,7 +22,6 @@ const Login = () => {
   const [normal, setNormal] = useState(true);
 
   const router = useRouter();
-  const cookies = new Cookies();
   const { register, handleSubmit, reset } = useForm();
 
   const handleLogin = async (data) => {
@@ -42,7 +41,7 @@ const Login = () => {
           setSuccess(true);
           setError(false);
           setTimeout(() => {
-            cookies.set("auth_token", res.data.auth_token, { path: "/" });
+            cookieCutter.set("auth_token", res.data.auth_token);
             router.push("/explore");
           }, 2000);
           reset({ username: "", password: "" });
@@ -66,12 +65,6 @@ const Login = () => {
         setDisabled(false);
       });
   };
-
-  useEffect(() => {
-    if (cookies.get("auth_token")) {
-      router.push("/explore");
-    }
-  });
 
   return (
     <div className={styles.container}>

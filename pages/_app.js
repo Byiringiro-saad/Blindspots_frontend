@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Router from "next/router";
 import NProgress from "nprogress";
+import { ToastContainer } from "react-toastify";
 
 import "../styles/globals.css";
 import "nprogress/nprogress.css";
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Coding Blindspots</title>
       </Head>
+      <ToastContainer />
       <Component {...pageProps} />
     </>
   );
