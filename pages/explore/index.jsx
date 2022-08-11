@@ -68,6 +68,7 @@ const Explore = () => {
     if (localStorage.getItem("auth_token")) {
       setLoading(true);
       axios.get("/api/snippets").then((data) => {
+        console.log(data.data);
         setSnippets(data.data);
         setCurrentSnippets(data.data);
         setLoading(false);

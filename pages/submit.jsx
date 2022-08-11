@@ -4,24 +4,35 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { getCookie } from "cookies-next";
+import Editor from "@monaco-editor/react";
 
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Submit.module.css";
 import Two_Part from "../layouts/two-part/two_part";
-import Editor from "../components/editor/editor";
 
 const Submit = () => {
   const router = useRouter();
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [languages, setLanguages] = useState([
+    "javascript",
+    "java",
+    "python",
+    "ruby",
+    "swift",
+    "go",
+    "rust",
+    "php",
+    "c/c++ or other languages",
+  ]);
+
   const { register, handleSubmit, reset } = useForm();
 
-  const handleCodeChange = useCallback((value, _) => {
-    setCode(value);
-  }, []);
+  const handleCodeChange = (e) => {
+    setCode(e.target.value);
+  };
 
   const handleSubmission = async (data) => {
     if (localStorage.getItem("auth_token")) {
@@ -96,9 +107,10 @@ const Submit = () => {
               />
             </div>
             <div className={styles.row}>
-              <label htmlFor="langauge">Language</label>
               <select name="language" {...register("language")} required>
-                <option value="javascript">Javascript</option>
+                {languages.map((lang) => (
+                  <option value={`${lang}`}>{lang}</option>
+                ))}
               </select>
             </div>
             <div className={styles.row}>
@@ -122,7 +134,25 @@ const Submit = () => {
             </div>
             <div className={styles.editorRow}>
               <label htmlFor="codes">Solution</label>
-              <Editor codes={code} onChange={handleCodeChange} />
+              <Editor
+                height={`100%`}
+                width={`100%`}
+                language="javascript"
+                value={code}
+                theme={{ value: "oceanic-next", label: "Oceanic Next" }}
+                defaultValue="// some comment"
+                onChange={handleCodeChange}
+                options={{
+                  lineNumbers: true,
+                  minimap: { enabled: false },
+                  scrollbar: {
+                    vertical: "hidden",
+                    horizontal: "hidden",
+                  },
+                  wordWrap: "on",
+                  fontSize: "12px",
+                }}
+              />
             </div>
             <p>
               In order for us to give you feedback on your code, please ensure

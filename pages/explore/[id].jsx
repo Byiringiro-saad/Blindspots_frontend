@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
+import { useRouter } from "next/router";
+import Editor from "@monaco-editor/react";
+import React, { useEffect, useState } from "react";
 
 import { MdReviews } from "react-icons/md";
 
@@ -8,7 +9,6 @@ import Nav from "../../components/nav/nav";
 import styles from "../../styles/Review.module.css";
 import Footer from "../../components/footer/footer";
 import Two_Part from "../../layouts/two-part/two_part";
-import Editor from "../../components/editor/editor";
 import InputWidget from "../../components/input/input";
 import { parseIfJson } from "../../features/parsetJson";
 
@@ -59,7 +59,29 @@ const Review = () => {
             <div className={styles.top}>
               <p>{review?.language}</p>
             </div>
-            <div className={styles.area}></div>
+            <div className={styles.area}>
+              <Editor
+                height={`100%`}
+                width={`100%`}
+                language={review?.language}
+                value={parseIfJson(review?.text)}
+                theme={{ value: "oceanic-next", label: "Oceanic Next" }}
+                defaultValue="// some comment"
+                onChange={null}
+                options={{
+                  readOnly: true,
+                  readOnly: true,
+                  lineNumbers: true,
+                  minimap: { enabled: false },
+                  scrollbar: {
+                    vertical: "hidden",
+                    horizontal: "hidden",
+                  },
+                  wordWrap: "on",
+                  fontSize: "12px",
+                }}
+              />
+            </div>
           </div>
         </div>
       </Two_Part>
