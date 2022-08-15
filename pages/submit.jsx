@@ -140,7 +140,7 @@ const Submit = () => {
                 language="javascript"
                 value={code}
                 theme={{ value: "oceanic-next", label: "Oceanic Next" }}
-                defaultValue="// some comment"
+                defaultValue="// Write codes here"
                 onChange={handleCodeChange}
                 options={{
                   lineNumbers: true,

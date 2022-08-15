@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import Editor from "@monaco-editor/react";
+import ReactPlaceholder from "react-placeholder";
 import React, { useEffect, useState } from "react";
 
 import { MdReviews } from "react-icons/md";
@@ -16,22 +17,25 @@ const Review = () => {
   const { query } = useRouter();
   const [review, setReview] = useState({});
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios.post("/api/review", { id: query?.id }).then((res) => {
-      console.log(res.data);
-      if (res.data.id) {
-        setReview(res.data);
-      }
+      setLoading(false);
+      setReview(res.data);
     });
+  }, [query]);
 
-    axios.post("/api/comments", { id: query?.id }).then((res) => {
-      console.log(res.data);
-      if (res.data.id) {
-        setComments(res.data);
-      }
+  useEffect(() => {
+    setLoading(true);
+    axios.post("/api/comment", { id: query?.id }).then((res) => {
+      setLoading(false);
+      setComments(res.data);
     });
-  }, []);
+  }, [query]);
+
+  console.log(comments);
 
   return (
     <div className={styles.container}>
@@ -39,10 +43,36 @@ const Review = () => {
       <Two_Part>
         <div className={styles.content}>
           <div className={styles.top}>
-            <p className={styles.gray}>
-              <MdReviews /> {review?.comments?.length} Reviews
-            </p>
-            <p className={styles.title}>{review?.title}.</p>
+            {loading ? (
+              <ReactPlaceholder
+                ready={!loading}
+                showLoadingAnimation={true}
+                type="rect"
+                style={{
+                  width: "300px",
+                  height: "25px",
+                }}
+              />
+            ) : (
+              <p className={styles.gray}>
+                <MdReviews className={styles.icon} /> {review.comments?.length}
+                <span> </span> Reviews
+              </p>
+            )}
+            {loading ? (
+              <ReactPlaceholder
+                ready={!loading}
+                showLoadingAnimation={true}
+                type="rect"
+                style={{
+                  width: "100%",
+                  height: "25px",
+                  margin: "5px 0",
+                }}
+              />
+            ) : (
+              <p className={styles.title}>{review?.title}.</p>
+            )}
             <div className={styles.btm}>
               <p className={styles.gray}>
                 Click on any line to add a review/comment
@@ -57,30 +87,56 @@ const Review = () => {
           </div>
           <div className={styles.bottom}>
             <div className={styles.top}>
-              <p>{review?.language}</p>
+              {loading ? (
+                <ReactPlaceholder
+                  ready={!loading}
+                  showLoadingAnimation={true}
+                  type="rect"
+                  style={{
+                    width: "100%",
+                    height: "25px",
+                    margin: "5px 0",
+                  }}
+                />
+              ) : (
+                <p>{review?.language}</p>
+              )}
             </div>
             <div className={styles.area}>
-              <Editor
-                height={`100%`}
-                width={`100%`}
-                language={review?.language}
-                value={parseIfJson(review?.text)}
-                theme={{ value: "oceanic-next", label: "Oceanic Next" }}
-                defaultValue="// some comment"
-                onChange={null}
-                options={{
-                  readOnly: true,
-                  readOnly: true,
-                  lineNumbers: true,
-                  minimap: { enabled: false },
-                  scrollbar: {
-                    vertical: "hidden",
-                    horizontal: "hidden",
-                  },
-                  wordWrap: "on",
-                  fontSize: "12px",
-                }}
-              />
+              {loading ? (
+                <ReactPlaceholder
+                  ready={!loading}
+                  showLoadingAnimation={true}
+                  type="rect"
+                  style={{
+                    width: "100%",
+                    height: "900px",
+                  }}
+                />
+              ) : (
+                <Editor
+                  height={`100%`}
+                  width={`100%`}
+                  language={review?.language}
+                  value={parseIfJson(review?.text)}
+                  theme="vs-light"
+                  defaultValue="// some comment"
+                  onChange={null}
+                  options={{
+                    readOnly: true,
+                    readOnly: true,
+                    lineNumbers: true,
+                    minimap: { enabled: false },
+                    scrollbar: {
+                      vertical: "hidden",
+                      horizontal: "hidden",
+                    },
+                    scrollBeyondLastLine: false,
+                    wordWrap: "on",
+                    fontSize: "12px",
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
