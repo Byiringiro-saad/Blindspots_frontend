@@ -25,26 +25,17 @@ const Submit = () => {
     "go",
     "rust",
     "php",
-    "c/c++ or other languages",
+    "clicke",
   ]);
 
   const { register, handleSubmit, reset } = useForm();
 
   const handleCodeChange = (e) => {
-    setCode(e.target.value);
+    setCode(e);
   };
 
   const handleSubmission = async (data) => {
-    if (localStorage.getItem("auth_token")) {
-      toast.error("Sign in first!", {
-        position: "top-right",
-        autoClose: 2000,
-        pauseOnHover: false,
-      });
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
-    }
+    setLoading(true);
     axios
       .post("/api/submit", {
         title: data.title,
@@ -53,6 +44,7 @@ const Submit = () => {
       })
       .then((res) => {
         setLoading(false);
+        console.log(res);
         if (res.data.id) {
           toast.success("Submission Successful", {
             position: "top-right",
@@ -61,6 +53,7 @@ const Submit = () => {
           });
           reset({ title: "", position: "", description: "" });
           setCode("");
+          router.push("/explore");
         } else {
           toast.error("Submission Failed", {
             position: "top-right",
@@ -108,8 +101,10 @@ const Submit = () => {
             </div>
             <div className={styles.row}>
               <select name="language" {...register("language")} required>
-                {languages.map((lang) => (
-                  <option value={`${lang}`}>{lang}</option>
+                {languages.map((lang, index) => (
+                  <option value={`${lang}`} key={index}>
+                    {lang}
+                  </option>
                 ))}
               </select>
             </div>
@@ -139,7 +134,7 @@ const Submit = () => {
                 width={`100%`}
                 language="javascript"
                 value={code}
-                theme={{ value: "oceanic-next", label: "Oceanic Next" }}
+                theme="vs-light"
                 defaultValue="// Write codes here"
                 onChange={handleCodeChange}
                 options={{

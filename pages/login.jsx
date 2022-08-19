@@ -97,9 +97,19 @@ const Login = () => {
               disabled={disabled}
               style={
                 error
-                  ? { background: "var(--red)" }
+                  ? {
+                      background: "var(--red)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }
                   : success
-                  ? { background: "var(--success)" }
+                  ? {
+                      background: "var(--success)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }
                   : {}
               }
             >

@@ -85,9 +85,9 @@ const Nav = ({ color }) => {
             <Link href="/explore">
               <p style={{ color: `#${color}` }}>Explore</p>
             </Link>
-            <Link href="/waitlist">
+            {/* <Link href="/waitlist">
               <p style={{ color: `#${color}` }}>Join Waitlist</p>
-            </Link>
+            </Link> */}
             <Link href="/contact">
               <p style={{ color: `#${color}` }}>Contact Us</p>
             </Link>

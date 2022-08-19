@@ -35,7 +35,7 @@ const Box = ({ review }) => {
           width={`100%`}
           language={review?.language}
           value={parseIfJson(review?.text)}
-          theme={{ value: "oceanic-next", label: "Oceanic Next" }}
+          theme="vs-light"
           defaultValue="// some comment"
           onChange={null}
           options={{

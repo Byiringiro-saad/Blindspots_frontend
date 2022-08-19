@@ -10,7 +10,7 @@ export default function handler(req, res) {
       .post("/snippets/", {
         title: title,
         language: language,
-        text: text,
+        text: JSON.stringify(text),
       })
       .then((response) => {
         res.send(response.data);

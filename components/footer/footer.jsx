@@ -1,9 +1,16 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 import Logo from "../logo/logo";
 import styles from "./footer.module.css";
 
 const Footer = () => {
+  const router = useRouter();
+
+  const goToLanguage = (e) => {
+    router.push(`/explore?lan=${e.target.innerHTML.toLowerCase()}`);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -13,17 +20,19 @@ const Footer = () => {
         <div className={styles.column}>
           <p className={styles.header}>Code Reviews</p>
           <ul>
-            <li>Java</li>
-            <li>Python</li>
-            <li>Ruby</li>
-            <li>Javascript</li>
-            <li>C/C++</li>
-            <li>Rust</li>
-            <li>Typescript</li>
-            <li>Go</li>
-            <li>Julia</li>
-            <li>Swift</li>
-            <li>Kotlin</li>
+            <li onClick={goToLanguage}>Java</li>
+            <l onClick={goToLanguage} i>
+              Python
+            </l>
+            <li onClick={goToLanguage}>Ruby</li>
+            <li onClick={goToLanguage}>Javascript</li>
+            <li onClick={goToLanguage}>C/C++</li>
+            <li onClick={goToLanguage}>Rust</li>
+            <li onClick={goToLanguage}>Typescript</li>
+            <li onClick={goToLanguage}>Go</li>
+            <li onClick={goToLanguage}>Julia</li>
+            <li onClick={goToLanguage}>Swift</li>
+            <li onClick={goToLanguage}>Kotlin</li>
           </ul>
         </div>
         <div className={styles.column}>

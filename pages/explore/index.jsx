@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import ReactPlaceholder from "react-placeholder/lib";
-import { getCookie } from "cookies-next";
 
 import Pagination from "../../components/pagination/pagination";
 import Nav from "../../components/nav/nav";
@@ -36,6 +35,19 @@ const Explore = () => {
   };
 
   const handlelanguage = (language) => {
+    if (language.name != "all") {
+      router.push(
+        { pathname: `/explore`, query: { lan: language.name } },
+        undefined,
+        {
+          shallow: true,
+        }
+      );
+    } else {
+      router.push({ pathname: `/explore`, query: {} }, undefined, {
+        shallow: true,
+      });
+    }
     setActive(language.name);
 
     if (language.name === "all") {
@@ -51,6 +63,20 @@ const Explore = () => {
       setCurrentSnippets(filtered);
     }
   };
+
+  useEffect(() => {
+    console.log(router.query.lan);
+    if (router.query.lan) {
+      const filtered = snippets.filter((snippet) => {
+        if (snippet.language === router.query.lan) {
+          return true;
+        }
+      });
+      setActive(router.query.lan);
+      setCurrentPage(1);
+      setCurrentSnippets(filtered);
+    }
+  }, [router.query, snippets]);
 
   useEffect(() => {
     const groupedSnippets = filterArray(snippets, "language");
@@ -91,7 +117,7 @@ const Explore = () => {
       <div className={styles.content}>
         <div className={styles.top}>
           <p>
-            <span>58 </span>
+            <span>{snippets?.length} </span>
             Featured reviews
           </p>
           <div className={styles.languages}>

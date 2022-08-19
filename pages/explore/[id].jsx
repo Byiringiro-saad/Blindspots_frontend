@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import Editor from "@monaco-editor/react";
+import {} from "monaco-editor";
 import ReactPlaceholder from "react-placeholder";
 import React, { useEffect, useState } from "react";
 
@@ -12,12 +13,14 @@ import Footer from "../../components/footer/footer";
 import Two_Part from "../../layouts/two-part/two_part";
 import InputWidget from "../../components/input/input";
 import { parseIfJson } from "../../features/parsetJson";
+import { addCommentLineWidget } from "../../components/comment/comment";
 
 const Review = () => {
   const { query } = useRouter();
   const [review, setReview] = useState({});
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isToggle, setIsToggle] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -35,7 +38,10 @@ const Review = () => {
     });
   }, [query]);
 
-  console.log(comments);
+  const createCommentWidgets = (cm) => {
+    console.log(cm);
+    // comments?.forEach((comment) => addCommentLineWidget(cm, comment));
+  };
 
   return (
     <div className={styles.container}>
@@ -122,8 +128,12 @@ const Review = () => {
                   theme="vs-light"
                   defaultValue="// some comment"
                   onChange={null}
+                  onMount={
+                    !isToggle
+                      ? (cm) => setTimeout(() => createCommentWidgets(cm), 0)
+                      : () => {}
+                  }
                   options={{
-                    readOnly: true,
                     readOnly: true,
                     lineNumbers: true,
                     minimap: { enabled: false },
