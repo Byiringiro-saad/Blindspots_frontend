@@ -17,10 +17,16 @@ const Contact = () => {
   const handleContact = async (data) => {
     setLoading(true);
 
-    axios.post("/api/contact", data).then((res) => {
-      setLoading(false);
-      console.log(res.data);
-    });
+    axios
+      .post("/api/contact", {
+        names: data.names,
+        email: data.email,
+        message: data.message,
+      })
+      .then((res) => {
+        setLoading(false);
+        console.log(res.data);
+      });
   };
 
   return (

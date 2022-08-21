@@ -101,6 +101,7 @@ const Explore = () => {
       });
     } else {
       toast.error("Sign in first!", {
+        toastId: "explore",
         position: "top-right",
         autoClose: 2000,
         pauseOnHover: false,

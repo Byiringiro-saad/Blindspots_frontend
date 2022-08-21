@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -67,6 +67,7 @@ const Submit = () => {
   useEffect(() => {
     if (!localStorage.getItem("auth_token")) {
       toast.error("Sign in first!", {
+        toastId: "submit",
         position: "top-right",
         autoClose: 2000,
         pauseOnHover: false,

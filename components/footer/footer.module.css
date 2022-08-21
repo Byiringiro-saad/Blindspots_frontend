@@ -28,6 +28,7 @@
   list-style: none;
   line-height: 22px;
   color: var(--bluish);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {

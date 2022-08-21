@@ -21,27 +21,21 @@ const Footer = () => {
           <p className={styles.header}>Code Reviews</p>
           <ul>
             <li onClick={goToLanguage}>Java</li>
-            <l onClick={goToLanguage} i>
-              Python
-            </l>
-            <li onClick={goToLanguage}>Ruby</li>
+            <li onClick={goToLanguage}>Clike</li>
+            <li onClick={goToLanguage}>Python</li>
             <li onClick={goToLanguage}>Javascript</li>
-            <li onClick={goToLanguage}>C/C++</li>
             <li onClick={goToLanguage}>Rust</li>
-            <li onClick={goToLanguage}>Typescript</li>
             <li onClick={goToLanguage}>Go</li>
-            <li onClick={goToLanguage}>Julia</li>
-            <li onClick={goToLanguage}>Swift</li>
-            <li onClick={goToLanguage}>Kotlin</li>
+            <li onClick={goToLanguage}>Ruby</li>
           </ul>
         </div>
         <div className={styles.column}>
           <p className={styles.header}>Resources</p>
           <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Blog</li>
-            <li>Interview</li>
+            <li onClick={() => router.push("/")}>Home</li>
+            <li onClick={() => router.push("/explore")}>Explore</li>
+            <li onClick={() => router.push("/submit")}>Submit</li>
+            <li onClick={() => router.push("/contact")}>Contact Us</li>
           </ul>
         </div>
         <div className={styles.column}>
