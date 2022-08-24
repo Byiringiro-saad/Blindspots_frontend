@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Editor from "@monaco-editor/react";
 import {} from "monaco-editor";
+import dynamic from "next/dynamic";
 import ReactPlaceholder from "react-placeholder";
 import React, { useEffect, useState } from "react";
 
@@ -14,6 +15,18 @@ import Two_Part from "../../layouts/two-part/two_part";
 import InputWidget from "../../components/input/input";
 import { parseIfJson } from "../../features/parsetJson";
 import { addCommentLineWidget } from "../../components/comment/comment";
+
+const CodeMirror = dynamic(
+  () => {
+    // import('codemirror/mode/xml/xml')
+    // import('codemirror/mode/javascript/javascript')
+    // import('codemirror/mode/css/css')
+    // import('codemirror/mode/markdown/markdown')
+    // import('codemirror/theme/material-ocean.css')
+    return import("react-codemirror");
+  },
+  { ssr: false }
+);
 
 const Review = () => {
   const { query } = useRouter();
@@ -120,31 +133,42 @@ const Review = () => {
                   }}
                 />
               ) : (
-                <Editor
-                  height={`100%`}
-                  width={`100%`}
-                  language={review?.language}
+                // <Editor
+                //   height={`100%`}
+                //   width={`100%`}
+                //   language={review?.language}
+                //   value={parseIfJson(review?.text)}
+                //   theme="vs-light"
+                //   defaultValue="// some comment"
+                //   onChange={null}
+                //   onMount={
+                //     !isToggle
+                //       ? (cm) => setTimeout(() => createCommentWidgets(cm), 0)
+                //       : () => {}
+                //   }
+                //   options={{
+                //     readOnly: true,
+                //     lineNumbers: true,
+                //     minimap: { enabled: false },
+                //     scrollbar: {
+                //       vertical: "hidden",
+                //       horizontal: "hidden",
+                //     },
+                //     scrollBeyondLastLine: false,
+                //     wordWrap: "on",
+                //     fontSize: "12px",
+                //   }}
+                // />
+                <CodeMirror
+                  className="editor"
                   value={parseIfJson(review?.text)}
-                  theme="vs-light"
-                  defaultValue="// some comment"
-                  onChange={null}
-                  onMount={
-                    !isToggle
-                      ? (cm) => setTimeout(() => createCommentWidgets(cm), 0)
-                      : () => {}
-                  }
+                  name="Devlog"
                   options={{
-                    readOnly: true,
+                    theme: "mdn-like",
                     lineNumbers: true,
-                    minimap: { enabled: false },
-                    scrollbar: {
-                      vertical: "hidden",
-                      horizontal: "hidden",
-                    },
-                    scrollBeyondLastLine: false,
-                    wordWrap: "on",
-                    fontSize: "12px",
+                    mode: "markdown",
                   }}
+                  onChange={null}
                 />
               )}
             </div>
