@@ -133,43 +133,43 @@ const Review = () => {
                   }}
                 />
               ) : (
-                // <Editor
-                //   height={`100%`}
-                //   width={`100%`}
-                //   language={review?.language}
-                //   value={parseIfJson(review?.text)}
-                //   theme="vs-light"
-                //   defaultValue="// some comment"
-                //   onChange={null}
-                //   onMount={
-                //     !isToggle
-                //       ? (cm) => setTimeout(() => createCommentWidgets(cm), 0)
-                //       : () => {}
-                //   }
-                //   options={{
-                //     readOnly: true,
-                //     lineNumbers: true,
-                //     minimap: { enabled: false },
-                //     scrollbar: {
-                //       vertical: "hidden",
-                //       horizontal: "hidden",
-                //     },
-                //     scrollBeyondLastLine: false,
-                //     wordWrap: "on",
-                //     fontSize: "12px",
-                //   }}
-                // />
-                <CodeMirror
-                  className="editor"
+                <Editor
+                  height={`100%`}
+                  width={`100%`}
+                  language={review?.language}
                   value={parseIfJson(review?.text)}
-                  name="Devlog"
-                  options={{
-                    theme: "mdn-like",
-                    lineNumbers: true,
-                    mode: "markdown",
-                  }}
+                  theme="vs-light"
+                  defaultValue="// some comment"
                   onChange={null}
+                  onMount={
+                    !isToggle
+                      ? (cm) => setTimeout(() => createCommentWidgets(cm), 0)
+                      : () => {}
+                  }
+                  options={{
+                    readOnly: true,
+                    lineNumbers: true,
+                    minimap: { enabled: false },
+                    scrollbar: {
+                      vertical: "hidden",
+                      horizontal: "hidden",
+                    },
+                    scrollBeyondLastLine: false,
+                    wordWrap: "on",
+                    fontSize: "12px",
+                  }}
                 />
+                // <CodeMirror
+                //   className="editor"
+                //   value={parseIfJson(review?.text)}
+                //   name="Devlog"
+                //   options={{
+                //     theme: "mdn-like",
+                //     lineNumbers: true,
+                //     mode: "markdown",
+                //   }}
+                //   onChange={null}
+                // />
               )}
             </div>
           </div>

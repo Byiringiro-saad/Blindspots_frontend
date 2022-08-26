@@ -42,7 +42,7 @@ const Two_Part = ({ children, data }) => {
           </div>
         ) : (
           <div className={styles.cards}>
-            {snippets.slice(0, 10).map((snippet, index) => (
+            {snippets?.slice(0, 10).map((snippet, index) => (
               <Card card={snippet} key={index} />
             ))}
             <Ad />

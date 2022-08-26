@@ -24,7 +24,10 @@ const Explore = () => {
 
   const indexOfLastPost = currentPage * perpage;
   const indexOfFirstPost = indexOfLastPost - perpage;
-  const currentPosts = currentSnippets.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = currentSnippets?.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
 
   const paginate = (page) => {
     setCurrentPage(page);
