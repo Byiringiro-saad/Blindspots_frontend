@@ -9,7 +9,7 @@ import Nav from "../../components/nav/nav";
 import styles from "../../styles/Review.module.css";
 import Footer from "../../components/footer/footer";
 import Two_Part from "../../layouts/two-part/two_part";
-import No_SSR from "../../components/no-ssr/no-ssr";
+import Editor from "../../components/editor/editor";
 import InputWidget from "../../components/input/input";
 import { parseIfJson } from "../../features/parsetJson";
 import { addCommentLineWidget } from "../../components/comment/comment";
@@ -19,7 +19,6 @@ const Review = () => {
   const [review, setReview] = useState({});
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isToggle, setIsToggle] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -37,9 +36,8 @@ const Review = () => {
     });
   }, [query]);
 
-  const createCommentWidgets = (cm) => {
-    console.log(cm);
-    // comments?.forEach((comment) => addCommentLineWidget(cm, comment));
+  const onClick = (all, al) => {
+    console.log(al);
   };
 
   return (
@@ -119,7 +117,8 @@ const Review = () => {
                   }}
                 />
               ) : (
-                <No_SSR></No_SSR>
+                // <Editor text={parseIfJson(review?.text)} onChange={onClick} />
+                <div className=""></div>
               )}
             </div>
           </div>
