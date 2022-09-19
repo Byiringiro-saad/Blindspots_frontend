@@ -37,6 +37,7 @@
   height: 70%;
   background: var(--white);
   cursor: pointer;
+  overflow: hidden;
 }
 
 .bottom {

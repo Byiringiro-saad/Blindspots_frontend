@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "../styles/globals.css";
 import "nprogress/nprogress.css";
 import "react-toastify/dist/ReactToastify.css";
+import "@uiw/react-textarea-code-editor/dist.css";
 import "react-placeholder/lib/reactPlaceholder.css";
 
 //Binding events.

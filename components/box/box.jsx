@@ -1,12 +1,16 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { MdReviews } from "react-icons/md";
-
-import Editor from "@monaco-editor/react";
 
 import { parseIfJson } from "../../features/parsetJson";
 
 import styles from "./box.module.css";
+
+const CodeEditor = dynamic(
+  () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
+  { ssr: false }
+);
 
 const Box = ({ review }) => {
   const router = useRouter();
@@ -30,25 +34,13 @@ const Box = ({ review }) => {
         </div>
       </div>
       <div className={styles.codes}>
-        <Editor
-          height={`100%`}
-          width={`100%`}
-          language={review?.language}
+        <CodeEditor
           value={parseIfJson(review?.text)}
-          theme="vs-light"
-          defaultValue="// some comment"
-          onChange={null}
-          options={{
-            readOnly: true,
-            lineNumbers: false,
-            minimap: { enabled: false },
-            scrollbar: {
-              vertical: "hidden",
-              horizontal: "hidden",
-              handleMouseWheel: null,
-            },
-            wordWrap: "on",
-            fontSize: "12px",
+          language="js"
+          padding={15}
+          style={{
+            width: "100%",
+            cursor: "pointer",
           }}
         />
       </div>

@@ -68,7 +68,6 @@ const Explore = () => {
   };
 
   useEffect(() => {
-    console.log(router.query.lan);
     if (router.query.lan) {
       const filtered = snippets.filter((snippet) => {
         if (snippet.language === router.query.lan) {
@@ -78,6 +77,7 @@ const Explore = () => {
       setActive(router.query.lan);
       setCurrentPage(1);
       setCurrentSnippets(filtered);
+      console.log(filtered);
     }
   }, [router.query, snippets]);
 

@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import axios from "axios";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import Editor from "@monaco-editor/react";
 
 import Nav from "../components/nav/nav";
 import Footer from "../components/footer/footer";
 import styles from "../styles/Submit.module.css";
 import Two_Part from "../layouts/two-part/two_part";
+
+const CodeEditor = dynamic(
+  () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
+  { ssr: false }
+);
 
 const Submit = () => {
   const router = useRouter();
@@ -31,7 +36,7 @@ const Submit = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const handleCodeChange = (e) => {
-    setCode(e);
+    setCode(e.target.value);
   };
 
   const handleSubmission = async (data) => {
@@ -130,23 +135,19 @@ const Submit = () => {
             </div>
             <div className={styles.editorRow}>
               <label htmlFor="codes">Solution</label>
-              <Editor
-                height={`100%`}
-                width={`100%`}
-                language="javascript"
+              <CodeEditor
                 value={code}
-                theme="vs-light"
-                defaultValue="// Write codes here"
+                language="js"
+                placeholder="Write your solution here!"
                 onChange={handleCodeChange}
-                options={{
-                  lineNumbers: true,
-                  minimap: { enabled: false },
-                  scrollbar: {
-                    vertical: "hidden",
-                    horizontal: "hidden",
-                  },
-                  wordWrap: "on",
-                  fontSize: "12px",
+                padding={15}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  background: "#ffffff",
+                  border: "1px solid #c4c4c4",
+                  borderRadius: "5px",
+                  overflow: "scroll",
                 }}
               />
             </div>
